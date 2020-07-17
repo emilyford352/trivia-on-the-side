@@ -5,6 +5,7 @@ import Loading from './Components/Loading';
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errorState, setErrorState] = useState(false);
 
   useEffect( () => {
     setLoading(true);
@@ -14,14 +15,15 @@ const App = () => {
           setData(data.results);
           setLoading(false);
       })
+      .catch(() => setErrorState(true))
   }, []);
 
   return (
     <div>
+        <h1>WE HAVE BEGUN</h1>
         {loading ? <Loading/> :
             data.length > 0 && data[0].category
         }
-      <h1>WE HAVE BEGUN</h1>
     </div>
   );
 };
